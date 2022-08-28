@@ -18,7 +18,7 @@ async function start() {
         await connection.start();
         console.Log('connected');
     } catch (err){
-        console.error(err);
+        //console.error(err);
         setTimeout(() => start(), 5000);
     }
 }
