@@ -12,6 +12,10 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
+    public IActionResult WebAssemblyClient()
+    {
+        return View();
+    }
 
     public IActionResult Index()
     {

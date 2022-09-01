@@ -10,7 +10,7 @@ namespace SignalRServer.Hubs
     {
         public async Task BroadcastMessage(string message)
         {
-            await Clients.All.RecieveMessage(message);
+            await Clients.All.ReceiveMessage(message);
         }
         public override async Task OnConnectedAsync()
         {
@@ -20,5 +20,9 @@ namespace SignalRServer.Hubs
         {
             await base.OnDisconnectedAsync(exception);
         }
+    }
+    public class hhhh : Hub
+    {
+        
     }
 }

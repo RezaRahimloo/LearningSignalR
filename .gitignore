@@ -4,3 +4,13 @@
 *.cache
 *.sln
 *.editorconfig
+*.v2
+*.v1
+.vs/LearningSignalR/v17/.suo
+*.dll
+*.gz
+*.dat
+*.pdb
+*.dll
+*.props
+*.json
