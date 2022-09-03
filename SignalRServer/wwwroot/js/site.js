@@ -18,7 +18,12 @@ $('#btn-others-message').click(function () {
 $('#btn-self-message').click(function () {
     let message = $('#self-message').val();
     connection.invoke("SendToSelf", message).catch(err => console.error(err.toString()));
-})
+});
+$('#btn-individual-message').click(function () {
+    let message = $('#individual-message').val();
+    let connectionId = $('#connection-for-message').val();
+    connection.invoke("SendToIndividual", connectionId, message).catch(err => console.error(err.toString()));
+});
 
 async function start() {
     try {

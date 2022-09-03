@@ -22,6 +22,7 @@ try
         Console.WriteLine( "0 - broadcast to all" );
         Console.WriteLine( "1 - send to others" );
         Console.WriteLine( "2 - send to self" );
+        Console.WriteLine( "3 - send to individual");
         Console.WriteLine( "exit - Exit the program" );
 
         string? action = Console.ReadLine();
@@ -39,6 +40,11 @@ try
                 break;
             case "2":
                 await hubConnection.SendAsync("SendToSelf", message);
+                break;
+            case "3":
+                Console.WriteLine("Please specify the connection id:");
+                var connectionId = Console.ReadLine();
+                await hubConnection.SendAsync("SendToIndividual", connectionId, message);
                 break;
             case "exit":
                 running = false;
