@@ -13,21 +13,35 @@ hubConnection.On<string>("ReceiveMessage", message => Console.WriteLine($"Signal
 try
 {
     await hubConnection.StartAsync();
-
-    while(true)
+    bool running = true;
+    while(running)
     {
         string? message = string.Empty;
 
-        Console.WriteLine("Please specify action: \n0 - broadcast to all \nexit - Exit the program");
+        Console.WriteLine( "Please specify the action:" );
+        Console.WriteLine( "0 - broadcast to all" );
+        Console.WriteLine( "1 - send to others" );
+        Console.WriteLine( "exit - Exit the program" );
 
         string? action = Console.ReadLine();
 
         Console.WriteLine("Please specify the message");
         message = Console.ReadLine();
 
-        if (action == "exit")
+        switch (action)
         {
-            break;
+            case "0":
+                await hubConnection.SendAsync("BroadcastMessage", message);
+                break;
+            case "1":
+                await hubConnection.SendAsync("SendToOthers", message);
+                break;
+            case "exit":
+                running = false;
+                break;
+            default:
+                Console.WriteLine("Undefined command!");
+                break;
         }
         await hubConnection.SendAsync("BroadCastMessage", message);
     }
