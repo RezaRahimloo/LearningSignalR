@@ -14,6 +14,10 @@ $('#btn-broadcast').click(function () {
 $('#btn-others-message').click(function () {
     let message = $('#others-message').val();
     connection.invoke("SendToOthers", message).catch(err => console.error(err.toString()));
+});
+$('#btn-self-message').click(function () {
+    let message = $('#self-message').val();
+    connection.invoke("SendToSelf", message).catch(err => console.error(err.toString()));
 })
 
 async function start() {

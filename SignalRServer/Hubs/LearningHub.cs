@@ -16,6 +16,10 @@ namespace SignalRServer.Hubs
         {
             await Clients.Others.ReceiveMessage(message);
         }
+        public async Task SendToSelf(string message)
+        {
+            await Clients.Caller.ReceiveMessage(message);
+        }
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();

@@ -21,6 +21,7 @@ try
         Console.WriteLine( "Please specify the action:" );
         Console.WriteLine( "0 - broadcast to all" );
         Console.WriteLine( "1 - send to others" );
+        Console.WriteLine( "2 - send to self" );
         Console.WriteLine( "exit - Exit the program" );
 
         string? action = Console.ReadLine();
@@ -36,6 +37,9 @@ try
             case "1":
                 await hubConnection.SendAsync("SendToOthers", message);
                 break;
+            case "2":
+                await hubConnection.SendAsync("SendToSelf", message);
+                break;
             case "exit":
                 running = false;
                 break;
@@ -43,7 +47,7 @@ try
                 Console.WriteLine("Undefined command!");
                 break;
         }
-        await hubConnection.SendAsync("BroadCastMessage", message);
+        //await hubConnection.SendAsync("BroadCastMessage", message);
     }
 }
 catch (System.Exception ex)
