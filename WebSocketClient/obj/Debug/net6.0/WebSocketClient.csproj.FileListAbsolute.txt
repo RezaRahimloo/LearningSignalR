@@ -1,0 +1,15 @@
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\bin\Debug\net6.0\WebSocketClient.exe
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\bin\Debug\net6.0\WebSocketClient.deps.json
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\bin\Debug\net6.0\WebSocketClient.runtimeconfig.json
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\bin\Debug\net6.0\WebSocketClient.dll
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\bin\Debug\net6.0\ref\WebSocketClient.dll
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\bin\Debug\net6.0\WebSocketClient.pdb
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.csproj.AssemblyReference.cache
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.AssemblyInfoInputs.cache
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.AssemblyInfo.cs
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.csproj.CoreCompileInputs.cache
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.dll
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\ref\WebSocketClient.dll
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.pdb
+D:\TheSelfTaught\LearningSignalR\WebSocketClient\obj\Debug\net6.0\WebSocketClient.genruntimeconfig.cache
