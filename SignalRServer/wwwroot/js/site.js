@@ -30,10 +30,10 @@ $('#btn-group-message').click( function (){
     connection.invoke("SendToGroup", group, message).catch(err => console.error(err.toString()));
 });
 $('#btn-group-add').click( function (){
-    let message = $('#group-to-add').val();
+    let group = $('#group-to-add').val();
     connection.invoke("AddUserToGroup", group).catch(err => console.error(err.toString()));
 });
-$('#btn-group-message').click( function (){
+$('#btn-group-remove').click( function (){
     let group = $('#group-to-remove').val();
     connection.invoke("RemoveUserFromGroup", group).catch(err => console.error(err.toString()));
 }); 

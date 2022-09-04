@@ -38,7 +38,7 @@ namespace SignalRServer.Hubs
         public async Task RemoveUserFromGroup(string groupName)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Caller.ReceiveMessage($"Current user added to {groupName} group!");
+            await Clients.Caller.ReceiveMessage($"Current user removed from {groupName} group!");
             await Clients.Others.ReceiveMessage($"User {Context.ConnectionId} removed from {groupName} group!");
         }
         public override async Task OnConnectedAsync()
