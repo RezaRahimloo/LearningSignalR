@@ -25,6 +25,22 @@ namespace SignalRServer.Hubs
             await Clients.Client(connectionId).ReceiveMessage(GetMessageToSend(message));
             //await Clients.Clients(connectionIds).ReceiveMessage(GetMessageToSend(message));
         }
+        public async Task SendToGroup(string groupName, string message)
+        {
+            await Clients.Group(groupName).ReceiveMessage(GetMessageToSend(message));
+        }
+        public async Task AddUserToGroup(string groupName)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            await Clients.Caller.ReceiveMessage($"Current user added to {groupName} group!");
+            await Clients.Others.ReceiveMessage($"{Context.ConnectionId} added to {groupName} group!");
+        }
+        public async Task RemoveUserFromGroup(string groupName)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+            await Clients.Caller.ReceiveMessage($"Current user added to {groupName} group!");
+            await Clients.Others.ReceiveMessage($"User {Context.ConnectionId} removed from {groupName} group!");
+        }
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
