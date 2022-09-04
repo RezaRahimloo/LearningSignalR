@@ -9,6 +9,22 @@ connection.on("ReceiveMessage", (message) => {
 
 $('#btn-broadcast').click(function () {
     var message = $('#broadcast').val();
+
+    if (message.includes(';')) {
+        let messages = message.split(';');
+        let subject = new signalR.Subject();
+
+        connection.send("BroadcastStream", subject).catch(err => console.error(err.toString()));
+        for(let i=0; i < messages.length; i++){
+            subject.next(messages[i]);
+        }
+
+        subject.complete();
+    } else {
+        connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
+    }
+    
+
     connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
 });
 $('#btn-others-message').click(function () {
