@@ -25,7 +25,7 @@ $('#btn-broadcast').click(function () {
     }
     
 
-    connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
+    //connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
 });
 $('#btn-others-message').click(function () {
     let message = $('#others-message').val();

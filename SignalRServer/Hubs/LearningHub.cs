@@ -12,6 +12,14 @@ namespace SignalRServer.Hubs
         {
             await Clients.All.ReceiveMessage(GetMessageToSend(message));
         }
+        public async Task BroadcastStream(IAsyncEnumerable<string> stream)
+        {// with IAsyncEnumerabe we can insert into the collection while reading from it 
+         // we use await foreach because we wait for items to be added to the collection
+            await foreach(string item in stream)
+            {
+                await Clients.Caller.ReceiveMessage($"Server received {item}");
+            }
+        }
         public async Task SendToOthers(string message)
         {
             await Clients.Others.ReceiveMessage(GetMessageToSend(message));
