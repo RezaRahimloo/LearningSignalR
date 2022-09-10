@@ -23,10 +23,17 @@ $('#btn-broadcast').click(function () {
     } else {
         connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
     }
-    
-
     //connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
 });
+$('#btn-trigger-stream').click(function () {
+    let numberOfJobs = parseInt($('#number-of-jobs').val(), 10);
+    connection.stream("TriggerStream", numberOfJobs)
+        .subscribe({
+            next: (message) => $('#signalr-message-panel')
+                                .prepend($('<div />').text(message))
+        });
+});
+
 $('#btn-others-message').click(function () {
     let message = $('#others-message').val();
     connection.invoke("SendToOthers", message).catch(err => console.error(err.toString()));

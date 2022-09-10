@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
@@ -18,6 +19,19 @@ namespace SignalRServer.Hubs
             await foreach(string item in stream)
             {
                 await Clients.Caller.ReceiveMessage($"Server received {item}");
+            }
+        }
+        public async IAsyncEnumerable<string> TriggerStream(
+            int jobsCount,
+            [EnumeratorCancellation]
+            CancellationToken cancellationToken
+        )
+        {
+            for(int i=0; i < jobsCount; i++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                yield return $"Job {i} executed successfully";
+                await Task.Delay(1000, cancellationToken);
             }
         }
         public async Task SendToOthers(string message)
