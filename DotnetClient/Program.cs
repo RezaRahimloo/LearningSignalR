@@ -28,6 +28,7 @@ try
         Console.WriteLine( "4 - send to a group");
         Console.WriteLine( "5 - add user to a group");
         Console.WriteLine( "6 - remove user from a group");
+        Console.WriteLine( "7 - trigger a stream server");
         Console.WriteLine( "exit - Exit the program" );
 
         string? action = Console.ReadLine();
@@ -82,6 +83,18 @@ try
                 break;
             case "6":
                 hubConnection.SendAsync("RemoveUserFromGroup", groupName).Wait();
+                break;
+            case "7":
+                Console.WriteLine("please specify the number of jobs to execute");
+                var numberOfJobs = int.Parse(Console.ReadLine() ?? "0");
+                var cancellationTokenSource = new CancellationTokenSource();
+                var stream = hubConnection.StreamAsync<string>(
+                    "TriggerStream", numberOfJobs, cancellationTokenSource.Token);
+                
+                await foreach(var reply in stream)
+                {
+                    Console.WriteLine(reply);
+                }
                 break;
             case "exit":
                 running = false;
