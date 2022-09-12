@@ -8,6 +8,7 @@
         withCredentials: true,
         timeout: 100000 
     })
+    .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())//for message pack
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
