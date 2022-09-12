@@ -24,6 +24,15 @@ builder.Services.AddSignalR(hubOptions =>
             }
         }
     })
+    .AddMessagePackProtocol(options => 
+    {
+        options.SerializerOptions = MessagePackSerializerOptions.Standard
+            .WithSecurity(MessagePackSecurity.UntrustedData)
+            .WithCompression(MessagePackCompression.Lz4Block)
+            .WithAllowAssemblyVersionMismatch(true)
+            .WithOldSpec()
+            .WithOmitAssemblyVersion(true);
+    })
     .AddJsonProtocol(options =>
         {
             options.PayloadSerializerOptions.PropertyNamingPolicy = null;
