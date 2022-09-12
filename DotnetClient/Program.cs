@@ -34,6 +34,15 @@ var hubConnection = new HubConnectionBuilder()
                              logging.SetMinimumLevel(LogLevel.Information);
                              //logging.AddConsole();
                          })
+                         .AddMessagePackProtocol(options => 
+                            {
+                                options.SerializerOptions = MessagePackSerializerOptions.Standard
+                                    .WithSecurity(MessagePackSecurity.UntrustedData)
+                                    .WithCompression(MessagePackCompression.Lz4Block)
+                                    .WithAllowAssemblyVersionMismatch(true)
+                                    .WithOldSpec()
+                                    .WithOmitAssemblyVersion(true);
+                            })
                          .Build();
 
 hubConnection.HandshakeTimeout = TimeSpan.FromSeconds(15);
