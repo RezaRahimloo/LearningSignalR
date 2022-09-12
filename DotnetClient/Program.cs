@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using MessagePack;
 using System.Threading.Channels;
 
 Console.WriteLine("Insert the URL of the SignalR hub");
