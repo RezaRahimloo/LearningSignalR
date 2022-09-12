@@ -1,6 +1,7 @@
 using SignalRServer.Hubs;
 using Microsoft.AspNetCore.Http.Connections;
 using System.Text.Json.Serialization;
+using MessagePack;
 
 var builder = WebApplication.CreateBuilder(args);
 
