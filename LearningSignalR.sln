@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRServer", "SignalRSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{4460DA6B-B767-4490-9704-B35B3E1F4A5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthProvider", "AuthProvider\AuthProvider.csproj", "{ABEE608E-592B-4B78-8E58-3FD1DCD31A58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4460DA6B-B767-4490-9704-B35B3E1F4A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4460DA6B-B767-4490-9704-B35B3E1F4A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4460DA6B-B767-4490-9704-B35B3E1F4A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABEE608E-592B-4B78-8E58-3FD1DCD31A58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEE608E-592B-4B78-8E58-3FD1DCD31A58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEE608E-592B-4B78-8E58-3FD1DCD31A58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEE608E-592B-4B78-8E58-3FD1DCD31A58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
