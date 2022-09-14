@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
+using SignalRServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -123,6 +124,21 @@ builder.Services.AddAuthentication(options =>
         };
 
     });
+builder.Services.AddAuthorization(options =>
+{ 
+    options.AddPolicy( "BasicAuth" , policy =>
+    { 
+        policy.RequireAuthenticatedUser();
+    });
+    options.AddPolicy( "AdminClaim" , policy =>
+    { 
+        policy.RequireClaim( "admin" );
+    });
+    options.AddPolicy( "AdminOnly" , policy =>
+    { 
+        policy.Requirements.Add( new RoleRequirement( "admin" ));
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

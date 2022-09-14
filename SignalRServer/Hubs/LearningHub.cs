@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace SignalRServer.Hubs
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + 
-        CookieAuthenticationDefaults.AuthenticationScheme)]
+        CookieAuthenticationDefaults.AuthenticationScheme, Policy ="BasicAuth")]
     public class LearningHub : Hub<ILearningHubClient>
     {
         public async Task BroadcastMessage(string message)
@@ -52,10 +52,12 @@ namespace SignalRServer.Hubs
             await Clients.Client(connectionId).ReceiveMessage(GetMessageToSend(message));
             //await Clients.Clients(connectionIds).ReceiveMessage(GetMessageToSend(message));
         }
+        [Authorize(Roles = "user")]
         public async Task SendToGroup(string groupName, string message)
         {
             await Clients.Group(groupName).ReceiveMessage(GetMessageToSend(message));
         }
+        [Authorize("AdminOnly")] 
         public async Task AddUserToGroup(string groupName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
