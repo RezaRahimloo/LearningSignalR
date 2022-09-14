@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRServer.Hubs
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + 
+        CookieAuthenticationDefaults.AuthenticationScheme)]
     public class LearningHub : Hub<ILearningHubClient>
     {
         public async Task BroadcastMessage(string message)

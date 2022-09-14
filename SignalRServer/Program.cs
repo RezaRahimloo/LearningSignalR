@@ -2,6 +2,10 @@ using SignalRServer.Hubs;
 using Microsoft.AspNetCore.Http.Connections;
 using System.Text.Json.Serialization;
 using MessagePack;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +69,60 @@ builder.Services.AddSignalR(hubOptions =>
             Console.WriteLine($"Number of default JSON converters: {options.PayloadSerializerOptions.Converters.Count}");
         });
 
+builder.Services.AddAuthentication(options => 
+    {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = "oidc";
+    })
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddOpenIdConnect("oidc", options => 
+    {
+        options.Authority = "https://localhost:5001" ;
+        options.ClientId = "webAppClient" ;
+        options.ClientSecret = "webAppClientSecret" ;
+        options.ResponseType = "code" ;
+        options.CallbackPath = "/signin-oidc" ;
+        options.SaveTokens = true ;
+        options.RequireHttpsMetadata = false;
+    })
+    .AddJwtBearer(options => 
+    {
+        JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+        options.Authority = "https://localhost:5001";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // ValidateIssuerSigningKey = true,
+            // IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8
+            //     .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false  
+        };
+        options.RequireHttpsMetadata = false;
+        
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var path = context.HttpContext.Request.Path;
+                if(path.StartsWithSegments("/learninghub"))
+                {
+                    // attempt to get a token from a query string used by websocket
+                    var accessToken = context.Request.Query["access_token"];
+
+                    //if not present, extract the token from Authorization header
+                    if(string.IsNullOrWhiteSpace(accessToken))
+                    {
+                        accessToken = context.Request.Headers["Authorization"]
+                            .ToString()
+                            .Replace("Bearer", "");//extracting the actual token
+                    }
+                    context.Token = accessToken;
+                }
+                return Task.CompletedTask;
+            }
+        };
+
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -82,7 +140,9 @@ app.UseRouting();
 app.UseCors("AllowAnyGet")
     .UseCors("AllowExampleDomain");
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
