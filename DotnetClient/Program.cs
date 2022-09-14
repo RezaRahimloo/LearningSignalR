@@ -7,8 +7,10 @@ using MessagePack;
 using System.Threading.Channels;
 
 Console.WriteLine("Insert the URL of the SignalR hub");
-
 string? url = Console.ReadLine();
+
+Console.WriteLine("please insert token:");
+var token = Console.ReadLine();
 
 var hubConnection = new HubConnectionBuilder()
                          .WithUrl(url,
@@ -29,6 +31,7 @@ var hubConnection = new HubConnectionBuilder()
                                 options.TransportMaxBufferSize = 1_000_000;
                                 options.WebSocketConfiguration = null;
                                 options.WebSocketFactory = null;
+                                options.AccessTokenProvider = () => Task.FromResult(token);
                             })
                          .ConfigureLogging(logging => {
                              logging.SetMinimumLevel(LogLevel.Information);
@@ -51,6 +54,8 @@ hubConnection.KeepAliveInterval = TimeSpan.FromSeconds(10);
 
 
 hubConnection.On<string>("ReceiveMessage", message => Console.WriteLine($"SignalR Hub message: {message}"));
+
+
 
 try
 {

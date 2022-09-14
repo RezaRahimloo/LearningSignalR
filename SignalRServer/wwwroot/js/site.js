@@ -6,9 +6,11 @@
         logMessageContent: true,
         skipNegotiation: false,
         withCredentials: true,
-        timeout: 100000 
+        timeout: 100000,
+        accessTokenFactory: () => myToken
     })
     .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())//for message pack
+
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
