@@ -29,3 +29,7 @@ D:\TheSelfTaught\LearningSignalR\DotnetClient\obj\Debug\net6.0\DotnetClient.dll
 D:\TheSelfTaught\LearningSignalR\DotnetClient\obj\Debug\net6.0\ref\DotnetClient.dll
 D:\TheSelfTaught\LearningSignalR\DotnetClient\obj\Debug\net6.0\DotnetClient.pdb
 D:\TheSelfTaught\LearningSignalR\DotnetClient\obj\Debug\net6.0\DotnetClient.genruntimeconfig.cache
+D:\TheSelfTaught\LearningSignalR\DotnetClient\bin\Debug\net6.0\MessagePack.dll
+D:\TheSelfTaught\LearningSignalR\DotnetClient\bin\Debug\net6.0\MessagePack.Annotations.dll
+D:\TheSelfTaught\LearningSignalR\DotnetClient\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Protocols.MessagePack.dll
+D:\TheSelfTaught\LearningSignalR\DotnetClient\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
